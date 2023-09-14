@@ -1,0 +1,17 @@
+@{
+    ViewData["Title"] = "Log in or Register";
+}
+
+
+<div class="text-center">
+    <h1>Register or Login</h1>
+
+    <div class="row">
+        @await Html.PartialAsync("_Register")
+        @await Html.PartialAsync("_Login")
+    </div>
+    @if (Context.Session.GetInt32("UUID") != null)
+    {
+        <a asp-action="Dashboard" asp-controller="Wedding"></a>
+    }
+</div>

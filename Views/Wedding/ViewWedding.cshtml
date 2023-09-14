@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "One Wedding";
+}
+
+@model Wedding
+@await Html.PartialAsync("_Nav")
+<br>
+<div class="row">
+    <div class="col-6">
+        <h1>@Model.GroomName ❤️ @Model.BrideName</h1>
+        <p>Date: @Model.WeddingDate.ToString("MMM d, yyyy")</p>
+
+        <p>Guest:</p>
+        <ul>
+            @foreach (Guest guest in Model.GuestList)
+            {
+                <li class="list-group-item">@guest.AttendingUser.FirstName</li>                
+            }
+            @if(Model.GuestList.Count == 0)
+            {
+                <li>Sike! 😒</li>
+            }
+
+
+        </ul>
+
+
+    </div>
+</div>

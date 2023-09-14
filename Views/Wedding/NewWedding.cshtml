@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "New Wedding";
+}
+
+@model Wedding
+@await Html.PartialAsync("_Nav")
+
+<h1>💍Plan a Wedding👰🏿🤵🏿</h1>
+<br>
+
+<form asp-action="CreateWedding" asp-controller="Wedding" method="Post">
+    <div class="my-3">
+        <label asp-for="GroomName">Wedder One:</label>
+        <input asp-for="GroomName">
+        <span class="text-danger" asp-validation-for="GroomName"></span>
+    </div>
+
+    <div class="my-3">
+        <label asp-for="BrideName">Wedder Two:</label>
+        <input asp-for="BrideName">
+        <span class="text-danger" asp-validation-for="BrideName"></span>
+    </div>
+
+    <div class="my-3">
+        <label asp-for="WeddingDate">Date:</label>
+        <input asp-for="WeddingDate" type="date">
+        <span class="text-danger" asp-validation-for="WeddingDate"></span>
+    </div>
+
+    <div class="my-3">
+        <label asp-for="WeddingAddress">Address:</label>
+        <input asp-for="WeddingAddress">
+        <span class="text-danger" asp-validation-for="WeddingAddress"></span>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Create</button>
+</form>

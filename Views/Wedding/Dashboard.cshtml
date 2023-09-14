@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@model List<Wedding>
+@await Html.PartialAsync("_Nav")
+@{
+    int UUID = (int)Context.Session.GetInt32("UUID");
+}
+<table class="table white-striped">
+    <thead>
+        <tr>
+            <th>Wedding Of</th>
+            <th>Date</th>
+            <th>Guest Count</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Wedding wedding in Model)
+        {
+            bool guest = wedding.GuestList.Any(wg => wg.UserId == UUID);
+            <tr>
+                <td> <a asp-action="ViewWedding" asp-controller="Wedding" asp-route-id="@wedding.WeddingId">
+                        @($"{wedding.BrideName} & {wedding.GroomName}")
+                    </a></td>
+                <td>@wedding.WeddingDate.ToString("MMM d yyyy")</td>
+                <td>@wedding.GuestList.Count </td>
+                <td>
+                    @if (wedding.UserId == UUID)
+                    {
+                        <form asp-action="DeleteWedding" 
+                        asp-controller="Wedding" 
+                        asp-route-id="@wedding.WeddingId" method="post">
+                        <button class="btn btn-primary">Dismiss</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-action="ToggleGuest" 
+                        asp-controller="Wedding" 
+                        asp-route-id="@wedding.WeddingId" 
+                        method="post">
+                        <button class="btn btn-primary">@(guest ? "Sike" : "Congrats")</button>
+                        </form>
+                    }
+                </td>
+
+
+
+            </tr>
+
+        }
+    </tbody>
+</table>
